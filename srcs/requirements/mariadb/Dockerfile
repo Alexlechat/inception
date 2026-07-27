@@ -4,8 +4,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     mariadb-server \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /run/mysqld && chown -R  mysql:mysql /run/mysqld
+RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+
+COPY tools/init.sh /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/init.sh
 
 EXPOSE 3306
 
-ENTRYPOINT [ "mysqld", "--user=mysql" ]
+ENTRYPOINT ["/usr/local/bin/init.sh"]
