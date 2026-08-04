@@ -12,4 +12,6 @@ RUN chmod +x /usr/local/bin/init.sh
 
 EXPOSE 3306
 
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
 ENTRYPOINT ["/usr/local/bin/init.sh"]
