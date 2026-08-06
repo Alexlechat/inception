@@ -1,4 +1,5 @@
 services:
+
   mariadb:
     build:
       context: ./requirements/mariadb
@@ -29,6 +30,21 @@ services:
       - db_password
       - wp_admin_password
       - wp_user_password
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      - inception
+
+  nginx:
+    build:
+      context: ./requirements/nginx
+    image: nginx
+    container_name: nginx
+    restart: on-failure
+    depends_on:
+      - wordpress
+    ports:
+      - "443:443"
     volumes:
       - wp_data:/var/www/html
     networks:
