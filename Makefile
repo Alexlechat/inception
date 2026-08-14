@@ -20,6 +20,7 @@ clean: down
 fclean:
 	docker compose -f srcs/docker-compose.yml down -v
 	docker system prune -af
+	sudo rm -rf /home/allefran/data/mariadb/* /home/allefran/data/wordpress/*
 
 re: fclean up
 
